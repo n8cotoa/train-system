@@ -85,3 +85,12 @@ delete('/operator/city/:id') do
   @cities = City.all
   erb(:manage_cities)
 end
+
+get('/view_cities') do
+  @cities = City.all
+  erb(:view_cities)
+end
+get('/view_trains') do
+  @trains = Train.all
+  erb(:view_trains)
+end
