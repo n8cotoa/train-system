@@ -35,6 +35,40 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: administrators; Type: TABLE; Schema: public; Owner: Guest
+--
+
+CREATE TABLE administrators (
+    id integer NOT NULL,
+    email character varying,
+    password character varying
+);
+
+
+ALTER TABLE administrators OWNER TO "Guest";
+
+--
+-- Name: administrators_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+--
+
+CREATE SEQUENCE administrators_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE administrators_id_seq OWNER TO "Guest";
+
+--
+-- Name: administrators_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+--
+
+ALTER SEQUENCE administrators_id_seq OWNED BY administrators.id;
+
+
+--
 -- Name: cities; Type: TABLE; Schema: public; Owner: Guest
 --
 
@@ -135,6 +169,13 @@ ALTER SEQUENCE trains_id_seq OWNED BY trains.id;
 
 
 --
+-- Name: administrators id; Type: DEFAULT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY administrators ALTER COLUMN id SET DEFAULT nextval('administrators_id_seq'::regclass);
+
+
+--
 -- Name: cities id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
@@ -153,6 +194,22 @@ ALTER TABLE ONLY stops ALTER COLUMN id SET DEFAULT nextval('stops_id_seq'::regcl
 --
 
 ALTER TABLE ONLY trains ALTER COLUMN id SET DEFAULT nextval('trains_id_seq'::regclass);
+
+
+--
+-- Data for Name: administrators; Type: TABLE DATA; Schema: public; Owner: Guest
+--
+
+COPY administrators (id, email, password) FROM stdin;
+1	tacobell@gmail.com	tacobellrules
+\.
+
+
+--
+-- Name: administrators_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+--
+
+SELECT pg_catalog.setval('administrators_id_seq', 1, true);
 
 
 --
@@ -198,6 +255,14 @@ COPY trains (id, name) FROM stdin;
 --
 
 SELECT pg_catalog.setval('trains_id_seq', 1, false);
+
+
+--
+-- Name: administrators administrators_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
+--
+
+ALTER TABLE ONLY administrators
+    ADD CONSTRAINT administrators_pkey PRIMARY KEY (id);
 
 
 --
