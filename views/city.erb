@@ -7,3 +7,9 @@
   <input id="name" name="name" type="text">
   <button type="submit">Update</button>
 </form>
+
+<h4>Remove <%= @city.name%></h4>
+<form action="/operator/city/<%= @city.id %>" method="post">
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit">Delete</button>
+</form>

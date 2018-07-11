@@ -77,3 +77,11 @@ patch('/operator/city/:id') do
   @cities = City.all
   erb(:city)
 end
+
+delete('/operator/city/:id') do
+  id = params[:id].to_i
+  @city = City.find(id)
+  @city.delete
+  @cities = City.all
+  erb(:manage_cities)
+end
