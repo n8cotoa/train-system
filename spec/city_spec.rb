@@ -38,4 +38,14 @@ describe(City) do
     end
   end
 
+  describe("#delete") do
+    it "will delete a row from the cities table" do
+      test_city = City.new({:id => nil, :name => "Portland"})
+      test_city2 = City.new({:id => nil, :name => "Vancouver"})
+      test_city.save
+      test_city2.save
+      test_city.delete
+      expect(City.all).to(eq([test_city2]))
+    end
+  end
 end
