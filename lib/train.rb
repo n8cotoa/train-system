@@ -26,4 +26,13 @@ class Train
     self.name.==(another_train.name)
   end
 
+  def update(attr)
+    @name = attr[:name]
+    @id = self.id
+    DB.exec("UPDATE trains SET name = '#{@name}' WHERE id = #{@id};")
+  end
+
+  def delete
+    DB.exec("DELETE FROM trains WHERE id = #{self.id};")
+  end
 end

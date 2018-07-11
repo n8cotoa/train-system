@@ -26,4 +26,22 @@ describe(Train) do
       expect(test_train1).to(eq(test_train2))
     end
   end
+  describe('#update') do
+    it('will update item in the database with new info') do
+      test_train = Train.new({:id => nil, :name => "A-Train"})
+      test_train.save()
+      test_train.update({:name => "Soul-Train"})
+      expect(test_train.name).to(eq("Soul-Train"))
+    end
+  end
+  describe('#delete') do
+    it('will delete item in the database') do
+      test_train1 = Train.new({:id => nil, :name => "A-Train"})
+      test_train2 = Train.new({:id => nil, :name => "B-Train"})
+      test_train1.save()
+      test_train2.save()
+      test_train2.delete()
+      expect(Train.all()).to(eq([test_train1]))
+    end
+  end
 end
