@@ -29,4 +29,13 @@ describe(City) do
     end
   end
 
+  describe("#update") do
+    it "will update the name of the city" do
+      test_city = City.new({:id => nil, :name => "Portland"})
+      test_city.save
+      test_city.update({:name => "Vancouver"})
+      expect(test_city.name).to(eq("Vancouver"))
+    end
+  end
+
 end

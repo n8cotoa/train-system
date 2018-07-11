@@ -25,4 +25,10 @@ class City
   def ==(other_city)
     self.name.==(other_city.name)
   end
+
+  def update(attr)
+    @name = attr[:name]
+    @id = self.id
+    DB.exec("UPDATE cities SET name = '#{@name}' WHERE id = #{@id};")
+  end
 end
