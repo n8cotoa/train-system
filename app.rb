@@ -3,6 +3,7 @@ require("sinatra/reloader")
 also_reload('lib/**/*.rb')
 require('./lib/train')
 require('./lib/city')
+require('./lib/login')
 require('pg')
 require('pry')
 
@@ -12,10 +13,21 @@ get('/') do
   erb(:index)
 end
 
-get('/operator') do
-  @trains = Train.all
-  @cities = City.all
-  erb(:operator)
+get('/operator_login') do
+  erb(:operator_login)
+end
+
+post('/operator') do
+  email = params["email"]
+  pass = params["password"]
+  user = Login.new({:email => email, :password => pass})
+  if user.login?
+    @trains = Train.all
+    @cities = City.all
+    erb(:operator)
+  else
+    erb(:operator_login)
+  end
 end
 
 get('/operator/manage_trains') do
