@@ -17,6 +17,12 @@ get('/operator_login') do
   erb(:operator_login)
 end
 
+get('/operator') do
+  @trains = Train.all
+  @cities = City.all
+  erb(:operator)
+end
+
 post('/operator') do
   email = params["email"]
   pass = params["password"]
