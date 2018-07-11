@@ -35,4 +35,11 @@ class Train
   def delete
     DB.exec("DELETE FROM trains WHERE id = #{self.id};")
   end
+
+  def self.find(id)
+    return_object = DB.exec("SELECT * FROM trains WHERE id = #{id};")
+    id = return_object.first["id"].to_i
+    name = return_object.first["name"]
+    train = Train.new({:name => name, :id => id})
+  end
 end

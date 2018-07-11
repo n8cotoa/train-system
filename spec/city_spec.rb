@@ -1,7 +1,7 @@
+require 'spec_helper'
 require 'rspec'
 require 'pry'
 require 'city'
-require 'spec_helper'
 require 'pg'
 
 describe(City) do

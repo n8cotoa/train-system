@@ -1,24 +1,5 @@
-<div class="new_form">
-  <h2>Create new train</h2>
-  <form action="/operator/new_train" method="post">
-    <div class="form-group">
-      <label for="train_name">Train Name</label>
-      <input for="train_name" id="train_name" name="train_name" class="form-control" type="text">
-    </div>
-    <button type="submit" class="btn btn-success">Add Train</button>
-  </form>
-</div>
-
-<div class="new_form">
-  <h2>Add a new city</h2>
-  <form action="/operator/new_city" method="post">
-    <div class="form-group">
-      <label for="city_name">City Name</label>
-      <input for="city_name" id="city_name" name="city_name" class="form-control" type="text">
-    </div>
-    <button type="submit" class="btn btn-success">Add City</button>
-  </form>
-</div>
+<a href="/operator/manage_trains"><span class="btn btn-info">Manage Trains</span></a>
+<a href="/operator/manage_cities"><span class="btn btn-info">Manage Cities</span></a>
 
 <div class="trains_display">
   <h3>Current Trains</h3>
@@ -33,7 +14,7 @@
   <h3>Current Cities</h3>
   <ul>
     <% @cities.each do |city| %>
-      <li><%= city.name %></li>
+      <li><a href = "/operator/city/<%= city.id %>"><%= city.name %></a></li>
     <% end %>
   </ul>
 </div>

@@ -1,7 +1,7 @@
+require 'spec_helper'
 require 'rspec'
 require 'pry'
 require 'train'
-require 'spec_helper'
 require 'pg'
 
 describe(Train) do

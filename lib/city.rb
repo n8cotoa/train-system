@@ -35,4 +35,11 @@ class City
   def delete
     DB.exec("DELETE FROM cities WHERE id = #{self.id};")
   end
+
+  def self.find(id)
+    return_object = DB.exec("SELECT * FROM cities WHERE id = #{id};")
+    id = return_object.first["id"].to_i
+    name = return_object.first["name"]
+    city = City.new({:name => name, :id => id})
+  end
 end

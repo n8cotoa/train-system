@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="new_form">
+      <h2>Create new train</h2>
+      <form action="/operator/new_train" method="post">
+        <div class="form-group">
+          <label for="train_name">Train Name</label>
+          <input for="train_name" id="train_name" name="train_name" class="form-control" type="text">
+        </div>
+        <button type="submit" class="btn btn-success">Add Train</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="trains_display">
+      <h3>Current Trains</h3>
+      <ul>
+        <% @trains.each do |train| %>
+          <li><a href = "/operator/train/<%= train.id %>"><%= train.name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

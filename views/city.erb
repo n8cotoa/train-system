@@ -1,0 +1,9 @@
+<h2><%=@city.name  %></h2>
+
+<h4>Update <%= @city.name%></h4>
+<form action="/operator/city/<%= @city.id %>" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <label for="name">Rename this city</label>
+  <input id="name" name="name" type="text">
+  <button type="submit">Update</button>
+</form>

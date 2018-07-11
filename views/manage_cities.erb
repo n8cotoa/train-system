@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-md-8">
+    <div class="new_form">
+      <h2>Add a new city</h2>
+      <form action="/operator/new_city" method="post">
+        <div class="form-group">
+          <label for="city_name">City Name</label>
+          <input for="city_name" id="city_name" name="city_name" class="form-control" type="text">
+        </div>
+        <button type="submit" class="btn btn-success">Add City</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="cities_display">
+      <h3>Current Cities</h3>
+      <ul>
+        <% @cities.each do |city| %>
+            <li><a href = "/operator/city/<%= city.id %>"><%= city.name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>
