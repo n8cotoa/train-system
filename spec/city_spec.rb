@@ -37,7 +37,6 @@ describe(City) do
       expect(test_city.name).to(eq("Vancouver"))
     end
   end
-
   describe("#delete") do
     it "will delete a row from the cities table" do
       test_city = City.new({:id => nil, :name => "Portland"})
@@ -46,6 +45,13 @@ describe(City) do
       test_city2.save
       test_city.delete
       expect(City.all).to(eq([test_city2]))
+    end
+  end
+  describe('.find') do
+    it 'will find an onject by id' do
+      test_city = City.new({:id => nil, :name => "Portland"})
+      test_city.save
+      expect(City.find(test_city.id)).to(eq(test_city))
     end
   end
 end

@@ -44,4 +44,11 @@ describe(Train) do
       expect(Train.all()).to(eq([test_train1]))
     end
   end
+  describe('.find') do
+    it 'will find an onject by id' do
+      test_train = Train.new({:id => nil, :name => "Blue Line"})
+      test_train.save
+      expect(Train.find(test_train.id)).to(eq(test_train))
+    end
+  end
 end
