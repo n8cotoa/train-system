@@ -11,6 +11,19 @@ describe(Train) do
     end
   end
   describe("#save") do
-    it("save instance of train")
+    it("save instance of train") do
+      test_train = Train.new({:id => nil, :name => "A-Train"})
+      test_train.save()
+      expect(Train.all()).to(eq([test_train]))
+    end
+  end
+  describe("#==") do
+    it("will properly compare two identical objects") do
+      test_train1 = Train.new({:id => nil, :name => "A-Train"})
+      test_train2 = Train.new({:id => nil, :name => "A-Train"})
+      test_train1.save()
+      test_train2.save()
+      expect(test_train1).to(eq(test_train2))
+    end
   end
 end

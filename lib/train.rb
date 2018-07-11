@@ -1,8 +1,9 @@
 class Train
+  attr_reader(:id, :name)
 
   def initialize(attr)
-    @id = attr["id"]
-    @name = attr["name"]
+    @id = attr[:id]
+    @name = attr[:name]
   end
 
   def self.all()
@@ -17,8 +18,12 @@ class Train
   end
 
   def save
-    result = DB.exec("INSERT INTO trains (name) VALUES (#{@name}) RETURNING id;")
+    result = DB.exec("INSERT INTO trains (name) VALUES ('#{@name}') RETURNING id;")
     @id = result.first["id"].to_i
+  end
+
+  def ==(another_train)
+    self.name.==(another_train.name)
   end
 
 end
