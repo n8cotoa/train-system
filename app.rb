@@ -82,11 +82,12 @@ end
 post('/operator/train/:id') do
   @train = Train.find(params["id"].to_i)
   city_ids = params["city_ids"]
-  if city_ids = []
+  times = params["times"]
+  if city_ids == []
     @cities = City.all
     erb(:train)
   else
-    @train.update({:city_ids => city_ids})
+    @train.update({:city_ids => city_ids, :times => times})
     @cities = City.all
     erb(:train)
   end
@@ -94,7 +95,7 @@ end
 
 patch('/operator/train/:id') do
   name = params["name"]
-  if name = ""
+  if name == ""
     @train = Train.find(params["id"].to_i)
     @cities = City.all
     erb(:train_fail)
@@ -123,7 +124,7 @@ end
 
 patch('/operator/city/:id') do
   name = params["name"]
-  if name = ""
+  if name == ""
     @city = City.find(params["id"].to_i)
     @cities = City.all
     erb(:city_fail)

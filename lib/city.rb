@@ -1,9 +1,10 @@
 class City
-  attr_reader(:id, :name)
+  attr_reader(:id, :name, :time)
 
   def initialize (attr)
     @id = attr[:id]
     @name = attr[:name]
+    @time = attr.fetch(:time, "")
   end
 
   def self.all
@@ -31,18 +32,19 @@ class City
     DB.exec("UPDATE cities SET name = '#{@name}' WHERE id = #{self.id};")
 
     attr.fetch(:train_ids, []).each do |train_id|
-      DB.exec("INSERT INTO stops (city_id, train_id) VALUES (#{self.id}, #{train_id});")
+      DB.exec("INSERT INTO stops (city_id, train_id, time) VALUES (#{self.id}, #{train_id});")
     end
   end
 
   def trains
     city_trains = []
-    results = DB.exec("SELECT train_id FROM stops WHERE city_id = #{self.id};")
+    results = DB.exec("SELECT * FROM stops WHERE city_id = #{self.id};")
     results.each do |result|
       train_id = result.fetch("train_id").to_i
       train = DB.exec("SELECT * FROM trains WHERE id = #{train_id};")
       name = train.first.fetch("name")
-      city_trains.push(Train.new({:name => name, :id => train_id}))
+      time = train.first.fetch("time")
+      city_trains.push(Train.new({:name => name, :id => train_id, :time => time}))
     end
     city_trains
   end

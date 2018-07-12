@@ -10,6 +10,7 @@
             <label>
               <input type="checkbox" name="city_ids[]" value="<%= city.id %>"><%= city.name %>
             </label>
+            <input type="time" name="times[]" value="">
           </div>
         <% end %>
         <button type="submit" class="btn btn-success">Add Stop</button>
@@ -21,7 +22,7 @@
     <% if @train.cities.any? %>
       <ul>
         <% @train.cities.each do |city| %>
-          <li><%= city.name %></li>
+          <li><%= city.name%> <%= city.time%></li>
         <% end %>
       </ul>
     <% else %>

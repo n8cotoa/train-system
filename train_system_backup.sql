@@ -108,7 +108,8 @@ ALTER SEQUENCE cities_id_seq OWNED BY cities.id;
 CREATE TABLE stops (
     id integer NOT NULL,
     city_id integer,
-    train_id integer
+    train_id integer,
+    "time" timestamp without time zone
 );
 
 
@@ -231,7 +232,7 @@ SELECT pg_catalog.setval('cities_id_seq', 1, false);
 -- Data for Name: stops; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY stops (id, city_id, train_id) FROM stdin;
+COPY stops (id, city_id, train_id, "time") FROM stdin;
 \.
 
 
