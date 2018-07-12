@@ -36,6 +36,28 @@ describe(City) do
       test_city.update({:name => "Vancouver"})
       expect(test_city.name).to(eq("Vancouver"))
     end
+    it('lets you add train to a city') do
+      city = City.new({:id => nil, :name => 'Portland'})
+      city.save()
+      train1 = Train.new({:id => nil, :name => 'Blue Line'})
+      train1.save()
+      train2 = Train.new({:id => nil, :name => 'Red Line'})
+      train2.save()
+      city.update({:train_ids => [train1.id, train2.id]})
+      expect(city.trains).to(eq([train1, train2]))
+    end
+  end
+  describe('#trains') do
+    it('returns all trains in a particular city') do
+      city = City.new({:id => nil, :name => 'Portland'})
+      city.save()
+      train1 = Train.new({:id => nil, :name => 'Blue Line'})
+      train1.save()
+      train2 = Train.new({:id => nil, :name => 'Red Line'})
+      train2.save()
+      city.update({:train_ids => [train1.id, train2.id]})
+      expect(city.trains).to(eq([train1, train2]))
+    end
   end
   describe("#delete") do
     it "will delete a row from the cities table" do
