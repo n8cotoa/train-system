@@ -43,10 +43,15 @@ end
 
 post('/operator/manage_trains') do
   name = params["train_name"]
-  new_train = Train.new({:id => nil, :name => name})
-  new_train.save()
-  @trains = Train.all
-  erb(:manage_trains)
+  if name == ""
+    @trains = Train.all
+    erb(:manage_trains_fail)
+  else
+    new_train = Train.new({:id => nil, :name => name})
+    new_train.save()
+    @trains = Train.all
+    erb(:manage_trains)
+  end
 end
 
 get('/operator/manage_cities') do
@@ -56,10 +61,15 @@ end
 
 post('/operator/manage_cities') do
   name = params["city_name"]
-  new_city = City.new({:id => nil, :name => name})
-  new_city.save()
-  @cities = City.all
-  erb(:manage_cities)
+  if name == ""
+    @cities = City.all
+    erb(:manage_cities_fail)
+  else
+    new_city = City.new({:id => nil, :name => name})
+    new_city.save()
+    @cities = City.all
+    erb(:manage_cities)
+  end
 end
 
 get('/operator/train/:id') do
@@ -72,17 +82,28 @@ end
 post('/operator/train/:id') do
   @train = Train.find(params["id"].to_i)
   city_ids = params["city_ids"]
-  @train.update({:city_ids => city_ids})
-  @cities = City.all
-  erb(:train)
+  if city_ids = []
+    @cities = City.all
+    erb(:train)
+  else
+    @train.update({:city_ids => city_ids})
+    @cities = City.all
+    erb(:train)
+  end
 end
 
 patch('/operator/train/:id') do
   name = params["name"]
-  @train = Train.find(params["id"].to_i)
-  @train.update({:name => name})
-  @cities = City.all
-  erb(:train)
+  if name = ""
+    @train = Train.find(params["id"].to_i)
+    @cities = City.all
+    erb(:train_fail)
+  else
+    @train = Train.find(params["id"].to_i)
+    @train.update({:name => name})
+    @cities = City.all
+    erb(:train)
+  end
 end
 
 delete('/operator/train/:id') do
@@ -102,10 +123,16 @@ end
 
 patch('/operator/city/:id') do
   name = params["name"]
-  @city = City.find(params["id"].to_i)
-  @city.update({:name => name})
-  @cities = City.all
-  erb(:city)
+  if name = ""
+    @city = City.find(params["id"].to_i)
+    @cities = City.all
+    erb(:city_fail)
+  else
+    @city = City.find(params["id"].to_i)
+    @city.update({:name => name})
+    @cities = City.all
+    erb(:city)
+  end
 end
 
 delete('/operator/city/:id') do

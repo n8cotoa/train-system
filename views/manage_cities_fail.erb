@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link" href="/operator">Operator Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/operator/manage_trains">Manage Trains</a>
+      </li>
+      <li class="nav-item active">
+        <a class="nav-link" href="/operator/manage_cities">Manage Cities<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/operator_login">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="row">
+  <div class="col-md-8">
+    <div class="new_form">
+      <h2>Add a new city</h2>
+      <form action="/operator/manage_cities" method="post">
+        <div class="form-group">
+          <label for="city_name">City Name</label>
+          <input for="city_name" id="city_name" name="city_name" class="form-control" type="text" placeholder="Please add a name">
+        </div>
+        <button type="submit" class="btn btn-success">Add City</button>
+      </form>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="cities_display">
+      <h3>Current Cities</h3>
+      <ul>
+        <% @cities.each do |city| %>
+            <li><a href = "/operator/city/<%= city.id %>"><%= city.name %></a></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</div>

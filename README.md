@@ -25,10 +25,8 @@ An application that builds a map of a custom train system.
 
 ## To-Do Items
 
-1. Form Validation
 1. Add Nav Bars for Editing Items
 1. Possibly look into Ajax?
-1. Stops for Trains
 
 ## User Stories
 * As a train system operator, I want to create, read, update, delete and list trains, so that I can track all of the trains in my system.

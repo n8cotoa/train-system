@@ -35,7 +35,7 @@
     <form action="/operator/train/<%= @train.id %>" method="post">
       <input type="hidden" name="_method" value="patch">
       <label for="name">Rename this train</label>
-      <input id="name" name="name" type="text">
+      <input id="name" name="name" type="text" placeholder="Please input new name">
       <button type="submit">Update</button>
     </form>
   </div>
