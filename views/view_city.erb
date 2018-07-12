@@ -1,0 +1,10 @@
+<h3>Trains in <%= @city.name %>:</h3>
+<% if @city.trains.any? %>
+  <ul>
+    <% @city.trains.each do |train| %>
+      <li><a href="/view_train/<%= train.id %>"><%= train.name %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no trains in <%= @city.name %>!</p>
+<% end %>

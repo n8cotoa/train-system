@@ -2,7 +2,7 @@
 <% if @cities.any? %>
   <ul>
     <% @cities.each do |city| %>
-        <li><%= city.name %></li>
+      <li><a href="/view_cities/<%= city.id %>"><%= city.name %></a></li>
     <% end %>
   </ul>
 <% else %>

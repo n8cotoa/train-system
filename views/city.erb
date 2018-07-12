@@ -1,5 +1,16 @@
 <h2><%=@city.name  %></h2>
-
+<div class="col-md-4">
+  <h4>Here are all the trains for <%= @city.name %>:</h4>
+  <% if @city.trains.any? %>
+    <ul>
+      <% @city.trains.each do |train| %>
+        <li><%= train.name %></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>There are no trains yet.</p>
+  <% end %>
+</div>
 <h4>Update <%= @city.name%></h4>
 <form action="/operator/city/<%= @city.id %>" method="post">
   <input type="hidden" name="_method" value="patch">

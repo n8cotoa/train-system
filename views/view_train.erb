@@ -1,0 +1,10 @@
+<h3>Stops for <%= @train.name %>:</h3>
+<% if @train.cities.any? %>
+  <ul>
+    <% @train.cities.each do |city| %>
+      <li><a href="/view_cities/<%= city.id %>"><%= city.name %></a></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no stops for <%= @train.name %>!</p>
+<% end %>

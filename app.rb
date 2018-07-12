@@ -120,7 +120,22 @@ get('/view_cities') do
   @cities = City.all
   erb(:view_cities)
 end
+
+get('/view_cities/:id') do
+  id = params[:id].to_i
+  @city = City.find(id)
+  @cities = City.all
+  erb(:view_city)
+end
+
 get('/view_trains') do
   @trains = Train.all
   erb(:view_trains)
+end
+
+get('/view_trains/:id') do
+  id = params[:id].to_i
+  @train = Train.find(id)
+  @trains = Train.all
+  erb(:view_train)
 end
