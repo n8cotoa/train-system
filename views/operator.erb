@@ -23,18 +23,26 @@
 
 <div class="trains_display">
   <h3>Current Trains</h3>
-  <ul>
-    <% @trains.each do |train| %>
-      <li><a href = "/operator/train/<%= train.id %>"><%= train.name %></a></li>
-    <% end %>
-  </ul>
+  <% if @trains.any? %>
+    <ul>
+      <% @trains.each do |train| %>
+        <li><a href = "/operator/train/<%= train.id %>"><%= train.name %></a></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>There are no trains!</p>
+  <% end %>
 </div>
 
 <div class="cities_display">
   <h3>Current Cities</h3>
-  <ul>
-    <% @cities.each do |city| %>
-      <li><a href = "/operator/city/<%= city.id %>"><%= city.name %></a></li>
-    <% end %>
-  </ul>
+  <% if @cities.any? %>
+    <ul>
+      <% @cities.each do |city| %>
+        <li><a href = "/operator/city/<%= city.id %>"><%= city.name %></a></li>
+      <% end %>
+    </ul>
+  <% else %>
+    <p>There are no cities!</p>
+  <% end %>
 </div>

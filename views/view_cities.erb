@@ -1,6 +1,10 @@
 <h3>Current Cities</h3>
-<ul>
-  <% @cities.each do |city| %>
-      <li><%= city.name %></li>
-  <% end %>
-</ul>
+<% if @cities.any? %>
+  <ul>
+    <% @cities.each do |city| %>
+        <li><%= city.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no cities!</p>
+<% end %>

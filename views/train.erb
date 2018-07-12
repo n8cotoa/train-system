@@ -1,15 +1,49 @@
 <h2><%=@train.name  %></h2>
+<div class="row">
+  <div class="col-md-8">
+    <h4>Add stops to this train:</h4>
+    <% if @cities.any? %>
+      <form action="/operator/train/<%= @train.id %>" method="post">
 
-<h4>Update <%= @train.name%></h4>
-<form action="/operator/train/<%= @train.id %>" method="post">
-  <input type="hidden" name="_method" value="patch">
-  <label for="name">Rename this train</label>
-  <input id="name" name="name" type="text">
-  <button type="submit">Update</button>
-</form>
-
-<h4>Remove <%= @train.name%></h4>
-<form action="/operator/train/<%= @train.id %>" method="post">
-  <input type="hidden" name="_method" value="delete">
-  <button type="submit">Delete</button>
-</form>
+        <% @cities.each do |city| %>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="city_ids[]" value="<%= city.id %>"><%= city.name %>
+            </label>
+          </div>
+        <% end %>
+        <button type="submit" class="btn btn-success">Add Stop</button>
+      </form>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <h4>Here are all the stops for <%= @train.name %>:</h4>
+    <% if @train.cities.any? %>
+      <ul>
+        <% @train.cities.each do |city| %>
+          <li><%= city.name %></li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p>There are no cities yet.</p>
+    <% end %>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-8">
+    <h4>Update <%= @train.name%></h4>
+    <form action="/operator/train/<%= @train.id %>" method="post">
+      <input type="hidden" name="_method" value="patch">
+      <label for="name">Rename this train</label>
+      <input id="name" name="name" type="text" value="<%= @train.name %>">
+      <button type="submit">Update</button>
+    </form>
+  </div>
+  <div class="col-md-4">
+    <h4>Remove <%= @train.name%></h4>
+    <form action="/operator/train/<%= @train.id %>" method="post">
+      <input type="hidden" name="_method" value="delete">
+      <button type="submit">Delete</button>
+    </form>
+  </div>
+</div>

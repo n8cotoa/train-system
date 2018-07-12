@@ -27,7 +27,7 @@ class Train
   end
 
   def update(attr)
-    @name = attr[:name]
+    @name = attr.fetch(:name, @name)
     DB.exec("UPDATE trains SET name = '#{@name}' WHERE id = #{self.id};")
 
     attr.fetch(:city_ids, []).each do |city_id|

@@ -41,11 +41,12 @@ get('/operator/manage_trains') do
   erb(:manage_trains)
 end
 
-post('/operator/new_train') do
+post('/operator/manage_trains') do
   name = params["train_name"]
   new_train = Train.new({:id => nil, :name => name})
   new_train.save()
-  redirect back
+  @trains = Train.all
+  erb(:manage_trains)
 end
 
 get('/operator/manage_cities') do
@@ -53,16 +54,26 @@ get('/operator/manage_cities') do
   erb(:manage_cities)
 end
 
-post('/operator/new_city') do
+post('/operator/manage_cities') do
   name = params["city_name"]
   new_city = City.new({:id => nil, :name => name})
   new_city.save()
-  redirect back
+  @cities = City.all
+  erb(:manage_cities)
 end
 
 get('/operator/train/:id') do
   id = params[:id].to_i
   @train = Train.find(id)
+  @cities = City.all
+  erb(:train)
+end
+
+post('/operator/train/:id') do
+  @train = Train.find(params["id"].to_i)
+  city_ids = params["city_ids"]
+  @train.update({:city_ids => city_ids})
+  @cities = City.all
   erb(:train)
 end
 
@@ -70,7 +81,7 @@ patch('/operator/train/:id') do
   name = params["name"]
   @train = Train.find(params["id"].to_i)
   @train.update({:name => name})
-  @trains = Train.all
+  @cities = City.all
   erb(:train)
 end
 
@@ -79,6 +90,7 @@ delete('/operator/train/:id') do
   @train = Train.find(id)
   @train.delete
   @trains = Train.all
+  @cities = City.all
   erb(:manage_trains)
 end
 

@@ -1,6 +1,10 @@
 <h3>Current Trains</h3>
-<ul>
-  <% @trains.each do |train| %>
-      <li><%= train.name %></li>
-  <% end %>
-</ul>
+<% if @trains.any? %>
+  <ul>
+    <% @trains.each do |train| %>
+        <li><%= train.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no trains!</p>
+<% end %>
