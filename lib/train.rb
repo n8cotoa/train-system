@@ -28,8 +28,23 @@ class Train
 
   def update(attr)
     @name = attr[:name]
-    @id = self.id
-    DB.exec("UPDATE trains SET name = '#{@name}' WHERE id = #{@id};")
+    DB.exec("UPDATE trains SET name = '#{@name}' WHERE id = #{self.id};")
+
+    attr.fetch(:city_ids, []).each do |city_id|
+      DB.exec("INSERT INTO stops (city_id, train_id) VALUES (#{city_id}, #{self.id});")
+    end
+  end
+
+  def cities
+    train_cities = []
+    results = DB.exec("SELECT city_id FROM stops WHERE train_id = #{self.id};")
+    results.each do |result|
+      city_id = result.fetch("city_id").to_i
+      city = DB.exec("SELECT * FROM cities WHERE id = #{city_id};")
+      name = city.first.fetch("name")
+      train_cities.push(City.new({:id => city_id, :name => name}))
+    end
+    train_cities
   end
 
   def delete
