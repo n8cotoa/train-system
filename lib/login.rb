@@ -4,6 +4,7 @@ class Login
     @password = attr[:password]
   end
 
+
   def login?
     db_user = DB.exec("SELECT * FROM administrators;")
     user_email = db_user.first["email"]
